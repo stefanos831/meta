@@ -1,0 +1,39 @@
+[08-Jun-2023 09:08:11 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 9
+[08-Jun-2023 09:08:11 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 10
+[08-Jun-2023 09:08:11 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 11
+[08-Jun-2023 09:08:11 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 12
+[08-Jun-2023 09:08:11 America/New_York] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/AddBooks.php on line 16
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/AddBooks.php on line 32
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 9
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 10
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 11
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'goldqqze_wp713'@'localhost' (using password: YES) in /home/goldqqze/public_html/NewLibrary/connection.php on line 12
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 5
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 6
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 8
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 9
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 59
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 83
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 104
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 113
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 143
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 180
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 206
+[08-Jun-2023 09:08:12 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 240
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'goldqqze_wp713'@'localhost' to database 'goldqqze_newlibrary' in /home/goldqqze/public_html/NewLibrary/connection.php on line 9
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'goldqqze_wp713'@'localhost' to database 'goldqqze_newlibrary' in /home/goldqqze/public_html/NewLibrary/connection.php on line 10
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'goldqqze_wp713'@'localhost' to database 'goldqqze_newlibrary' in /home/goldqqze/public_html/NewLibrary/connection.php on line 11
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'goldqqze_wp713'@'localhost' to database 'goldqqze_newlibrary' in /home/goldqqze/public_html/NewLibrary/connection.php on line 12
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 5
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 6
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 8
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 9
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 59
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 83
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 104
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, bool given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 113
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 143
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 180
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 206
+[08-Jun-2023 09:10:22 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/goldqqze/public_html/NewLibrary/Admin/index.php on line 240
+[09-Jun-2023 04:00:21 America/New_York] PHP Notice:  Undefined variable: page in /home/goldqqze/public_html/NewLibrary/Admin/EditBooks.php on line 267

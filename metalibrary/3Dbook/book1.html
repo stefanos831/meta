@@ -1,0 +1,208 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta charset="UTF-8">
+  <title>Embed a PDF in HTML using the Adobe Embed API</title>
+  <link rel="stylesheet" href="./style.css">
+
+<style>
+    
+body {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  background-color: black;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  width: 225px;
+  padding: 20px;
+}
+
+button {
+  background-color: #4caf50;
+  border: none;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+#embeddedView {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.error-message {
+  text-align: center;
+  color: red;
+  font-size: 24pt;
+  width: 500px;
+  margin: 0 auto;
+}
+    
+</style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<div id="pdfViewer">
+ <div id="embeddedView"></div>
+</div> 
+
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+<!-- partial -->
+  <script>
+  
+ 
+  
+//var embeddedView = document.getElementById('embeddedView');  
+//embeddedView.style.display = "none";    
+  
+const pPDFEmbedAPIWrapper = {
+      displayPDF: function (urlToPDF) {
+        fetch(urlToPDF)
+          .then(pPDFEmbedAPIWrapper.errorHandler)
+          .then((response) => response.blob())
+          .then((blob) => {
+            pPDFEmbedAPIWrapper.embedView(blob, urlToPDF);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+
+      embedView: function (blob, urlToPDF) {
+        if (window.adobeDCView) {
+          window.adobeDCView = null;
+        }
+        window.adobeDCView = new AdobeDC.View({
+          clientId: pPDFEmbedAPIWrapper.clientId,
+          divId: pPDFEmbedAPIWrapper.divId
+        });
+        window.adobeFilePreview = adobeDCView.previewFile(
+          {
+            content: { promise: blob.arrayBuffer() },
+            metaData: { fileName: urlToPDF.split("/").slice(-1)[0] }
+          },
+          pPDFEmbedAPIWrapper.viewerOptions
+        );
+      },
+
+      errorHandler: function (response) {
+        if (!response.ok) {
+          if (typeof badResponse === "function") {
+            badResponse(response); // modify the DOM here
+          }
+          throw Error("Fetch Response Status: " + response.status + " - " + response.statusText);
+        }
+        if (response.headers.get("Content-Type") != "application/pdf") {
+          if (typeof notPDF === "function") {
+            notPDF(response); // modify the DOM here
+          }
+          throw Error("The content at the requested URL is not a PDF file. Content-Type: " + response.headers.get("Content-Type"));
+        }
+        return response;
+      },
+
+    }
+
+    pPDFEmbedAPIWrapper.clientId = "04294797e1fb42a7805432d8b3129839"; // This clientId can be used for any CodePen example;
+    pPDFEmbedAPIWrapper.viewerOptions = {
+      embedMode: "FULL_WINDOW", //FULL_WINDOW , SIZED_CONTAINER
+      defaultViewMode: "FIT_PAGE", //FIT_WIDTH , FIT_PAGE
+      showDownloadPDF: false,
+      showPrintPDF: false,
+      showLeftHandPanel: false,
+      showAnnotationTools: false
+    };
+    pPDFEmbedAPIWrapper.divId = "embeddedView";
+
+
+
+
+    document.addEventListener("adobe_dc_view_sdk.ready", (event) => {
+
+      pPDFEmbedAPIWrapper.displayPDF("https://babylonjs-academy.com/Customers/GoldenLeafWorld/newLibrary/Uploads/Ebook/Circuits.pdf");
+    });
+
+
+    function badResponse(response) {
+      var messageElement = document.createElement("div");
+      messageElement.classList.add("error-message");
+      messageElement.appendChild(document.createTextNode("Fetch Response Status: " + response.status + " - " + response.statusText));
+      document.getElementById("embeddedView").clearChildren();
+      document.getElementById("embeddedView").appendChild(messageElement);
+    }
+
+    function notPDF(response) {
+      var messageElement = document.createElement("div");
+      messageElement.classList.add("error-message");
+      messageElement.appendChild(document.createTextNode("The MIME type of the requested content is " + response.headers.get("Content-Type") + ". The content must be MIME type application/pdf."));
+      document.getElementById("embeddedView").clearChildren();
+      document.getElementById("embeddedView").appendChild(messageElement);
+    }
+
+    // Helper functions
+    // Add arrayBuffer if necessary i.e. Safari
+    (function () {
+      if (Blob.arrayBuffer != "function") {
+        Blob.prototype.arrayBuffer = myArrayBuffer;
+      }
+
+      function myArrayBuffer() {
+        return new Promise((resolve) => {
+          let fileReader = new FileReader();
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+          fileReader.readAsArrayBuffer(this);
+        });
+      }
+    })();
+
+    if (typeof Element.prototype.clearChildren === 'undefined') {
+      Object.defineProperty(Element.prototype, 'clearChildren', {
+        configurable: true,
+        enumerable: true, // false
+        value: function () {
+          while (this.firstChild) this.removeChild(this.lastChild);
+        }
+      });
+    }      
+         
+  </script>
+
+</body>
+</html>

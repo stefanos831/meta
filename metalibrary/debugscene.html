@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>Basic Scene</title>
+
+        <!-- Babylon.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+
+let engine, scene;
+let time;
+
+
+init()
+animate()
+
+function init() {
+  const canvas = document.getElementById('renderCanvas')
+  engine = new BABYLON.Engine(canvas, true, {}, true)
+
+  scene = new BABYLON.Scene(engine)
+  scene.clearColor = new BABYLON.Color4(0, 0, 0, 0)
+  scene.useRightHandedSystem = true
+
+scene.enablePhysics(new BABYLON.Vector3(0,-20,0), new BABYLON.CannonJSPlugin())
+
+  scene.environmentIntensity = 1
+  //  scene.debugLayer.show()
+
+    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+    // Default intensity is 1. Let's dim the light a small amount
+    light.intensity = 0;
+
+    var dirLight = new BABYLON.DirectionalLight("dirLight", new BABYLON.Vector3(-200, -100, 0), scene); //5,-5,10
+    dirLight.position = new BABYLON.Vector3(0, 10, 0);
+    dirLight.intensity = 1;
+        dirLight.shadowMinZ = 1;
+    dirLight.shadowMaxZ = 2500;
+    
+    var shadowGenerator = new BABYLON.ShadowGenerator(1024, dirLight);  
+    //shadowGenerator.useBlurExponentialShadowMap = true;
+    //shadowGenerator.useExponentialShadowMap = true;
+    shadowGenerator.useContactHardeningShadow = true;
+    shadowGenerator.filteringQuality = BABYLON.ShadowGenerator.QUALITY_HIGH;
+    //shadowGenerator.bias = 0.01;
+
+
+  const camera = new BABYLON.ArcRotateCamera(
+    'camera',
+    BABYLON.Tools.ToRadians(-90),
+    BABYLON.Tools.ToRadians(70),
+    9,
+    new BABYLON.Vector3(0, 1.2, 0),
+    scene
+  )
+
+  camera.target = new BABYLON.Vector3(0, 1.3, 0)
+  camera.attachControl(canvas, true)
+  camera.upperBetaLimit = 1.4
+
+  new BABYLON.HemisphericLight('light', new BABYLON.Vector3(1, 1, 0))
+
+  //const ground = BABYLON.MeshBuilder.CreateGround('ground', { width: 40, height: 20 }, scene)
+  //ground.material = new BABYLON.GridMaterial('grid', scene)
+
+// Load the model
+ BABYLON.SceneLoader.ImportMesh("", "", "Models/LibraryFinal.glb", scene, function (newMeshes, skeletons) {
+     
+var DBscale = 10     
+     
+        var model = newMeshes[0];
+var PI = Math.PI / -1;
+        model.rotation = new BABYLON.Vector3(0, PI, 0);
+        model.position = new BABYLON.Vector3(0, -6, 0);
+        model.scaling = new BABYLON.Vector3(DBscale, DBscale, DBscale);
+
+
+
+
+var bookShelf1 = scene.getMeshByName("SM_Bookshelf_02_LOD0_15");
+bookShelf1.setParent(null);
+bookShelf1.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf1, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene); 
+
+	bookShelf1.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf1.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+var bookShelf2= scene.getMeshByName("SM_Bookshelf_02_LOD0_12");
+bookShelf2.setParent(null);
+bookShelf2.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf2, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf2.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf2.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+var bookShelf3 = scene.getMeshByName("SM_Bookshelf_02_LOD0_13");
+bookShelf3.setParent(null);
+bookShelf3.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf3, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf3.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf3.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+var bookShelf4 = scene.getMeshByName("SM_Bookshelf_02_LOD0_16");
+bookShelf4.setParent(null);
+bookShelf4.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf4, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf4.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf4.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+console.log("clicked")
+	}));
+
+
+var bookShelf5 = scene.getMeshByName("SM_Bookshelf_02_LOD0_14");
+bookShelf5.setParent(null);
+bookShelf5.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf5, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf5.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf5.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+console.log("clicked")
+	}));
+
+
+var bookShelf6 = scene.getMeshByName("SM_Bookshelf_02_LOD0_17");
+bookShelf6.setParent(null);
+bookShelf6.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf6, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf6.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf6.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+// second row
+
+var bookShelf7 = scene.getMeshByName("SM_Bookshelf_02_LOD0_9");
+bookShelf7.setParent(null);
+bookShelf7.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf7, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf7.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf7.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+
+var bookShelf8 = scene.getMeshByName("SM_Bookshelf_02_LOD0_6");
+bookShelf8.setParent(null);
+bookShelf8.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf8, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf8.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf8.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+var bookShelf9 = scene.getMeshByName("SM_Bookshelf_02_LOD0_7");
+bookShelf9.setParent(null);
+bookShelf9.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf9, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf9.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf9.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+var bookShelf10 = scene.getMeshByName("SM_Bookshelf_02_LOD0_10");
+bookShelf10.setParent(null);
+bookShelf10.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf10, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf10.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf10.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+var bookShelf11 = scene.getMeshByName("SM_Bookshelf_02_LOD0_8");
+bookShelf11.setParent(null);
+bookShelf11.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf11, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+
+	bookShelf11.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf11.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+var bookShelf12 = scene.getMeshByName("SM_Bookshelf_02_LOD0_11");
+bookShelf12.setParent(null);
+bookShelf12.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf12, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf12.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf12.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	console.log("clicked")
+	}));
+
+
+// third row
+
+var bookShelf13 = scene.getMeshByName("SM_Bookshelf_02_LOD0_5");
+bookShelf13.setParent(null);
+bookShelf13.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf13, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+
+	bookShelf13.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf13.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+var bookShelf14 = scene.getMeshByName("SM_Bookshelf_02_LOD0_2");
+bookShelf14.setParent(null);
+bookShelf14.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf14, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+
+	bookShelf14.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf14.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+var bookShelf15 = scene.getMeshByName("SM_Bookshelf_02_LOD0_4");
+bookShelf15.setParent(null);
+bookShelf15.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf15, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+
+var bookShelf16 = scene.getMeshByName("SM_Bookshelf_02_LOD0_1");
+bookShelf16.setParent(null);
+bookShelf16.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf16, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+	bookShelf16.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf16.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+
+var bookShelf17 = scene.getMeshByName("SM_Bookshelf_02_LOD0");
+bookShelf17.setParent(null);
+bookShelf17.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf17, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+
+	bookShelf17.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf17.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+
+var bookShelf18 = scene.getMeshByName("SM_Bookshelf_02_LOD0_3");
+bookShelf18.setParent(null);
+bookShelf18.physicsImpostor = new BABYLON.PhysicsImpostor(bookShelf18, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene);
+
+
+	bookShelf18.actionManager = new BABYLON.ActionManager(scene);
+	bookShelf18.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log("clicked")
+	}));
+
+
+//build in ground
+var finalGround = scene.getMeshByName("SM_LevelMesh_Floor1");
+finalGround.receiveShadows = true;
+ 
+for (let i = 0; i < newMeshes.length; i++) {
+
+shadowGenerator.getShadowMap().renderList.push(newMeshes[i]);
+}  
+        
+    }); 
+
+
+//debug
+   document.addEventListener('keydown', function(event)
+    {
+      var code = event.keyCode || event.which;
+      if (code === 13) { 
+scene.debugLayer.show();
+      }
+    else { 
+  
+    }  
+        
+    }); 
+
+
+  window.addEventListener('resize', onWindowResize, false)
+
+  
+}
+
+function onWindowResize() {
+  engine.resize()
+}
+
+
+function animate() {
+  requestAnimationFrame(animate)
+
+
+
+  scene.render()
+}
+
+
+
+    </script>
+</body>
+</html>
